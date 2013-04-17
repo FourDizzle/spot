@@ -2,9 +2,9 @@
 class DbConnect{
     function dbLink(){
         try{
-            $link = new \PDO(   'mysql:host=localhost;dbname=ucwdjrrq_conversation',
-                                'ucwdjrrq',
-                                '0x3neD24Dv',
+            $link = new \PDO(   'mysql:host=localhost;dbname=conversation',
+                                'root',
+                                '',
                                 array(
                                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                                     \PDO::ATTR_PERSISTENT => false,
