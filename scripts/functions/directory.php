@@ -1,39 +1,46 @@
 <?php
 
-class directory_class {
-    private static $imagesPath = '/V3/images/';
-    private $scriptPath = 'localhost/V3/script';
-    private $dbName = 'ucwdjrrq_conversation';
-    private $dbUserName = 'root';    
-    private $password = 'root';
-    private $dbPath = 'localhost';
-    private $styleSheet = 'localhost/layout/stylesheets/style.css';
+class file_paths {
+    
+    private static $imagesPath = 'images/';
+    private static $scriptPath = 'script/';
+    private static $dbName = 'conversation';
+    private static $dbUserName = 'root';    
+    private static $password = '';
+    private static $dbPath = 'localhost';
+    private static $styleSheet = 'layout/stylesheets/style.css';
+    private static $root = '/spot/spot/';
             
-    public function getImagesPath() {        
-        return $this::$imagesPath;
+    static function getImagesPath() {        
+        return self::$root . self::$imagesPath;
     }
 
-    function getScriptPath() {        
-        return this::$scriptPath;
+    static function getScriptPath() {        
+        return self::$root . self::$scriptPath;
     }
 
-    function getDbName() {        
-        return this::$dbName;
+    static function getDbName() {        
+        return self::$dbName;
     }
 
-    function getDbUserName() {
-        return this::$dbUserName;
+    static function getDbUserName() {
+        return self::$dbUserName;
     }
 
-    function getDbPassword() {
-        return this::$password;
+    static function getDbPassword() {
+        return self::$password;
     }
 
-    function getDbPath() {
-        return this::$dbPath;
+    static function getDbPath() {
+        return self::$dbPath;
     }
     
-    function getStyleSheetPath() {
-        return this::$styleSheet;
+    static function getStyleSheetPath() {
+        return self::$root . self::$styleSheet;
+    }
+    
+    static function getRoot() {
+        $directory = $_SERVER['DOCUMENT_ROOT'] . self::$root;
+        return $directory;
     }
 }

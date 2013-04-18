@@ -1,10 +1,18 @@
 <?php
+include_once 'directory.php';
+
 class DbConnect{
-    function dbLink(){
+    
+    private $username = file_paths::getDbUserName;
+    private $password = file_paths::getDbPassword;
+    private $dbname = file_paths::getDbName;
+    private $dblocation = file_paths::getDbPath;
+    
+    static function dbLink(){
         try{
-            $link = new \PDO(   'mysql:host=localhost;dbname=ucwdjrrq_conversation',
-                                'ucwdjrrq',
-                                '0x3neD24Dv',
+            $link = new \PDO(   "mysql:host=$this->dblocation;dbname=$this->dbname",
+                                "$this->username",
+                                "$this->password",
                                 array(
                                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                                     \PDO::ATTR_PERSISTENT => false,

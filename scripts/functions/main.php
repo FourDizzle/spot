@@ -5,9 +5,9 @@ include_once 'database.php';
 
 class Main
 {
-
+    
     function getStylesheet() {
-            echo('layout/stylesheets/style.css');
+            echo(file_paths::getStyleSheetPath());
     }
     
     /* creates a compressed zip file */
@@ -96,18 +96,18 @@ class Main
         #make qr code
         require("qrcode/qrlib.php");
         $filename = 
-                '/home/ucwdjrrq/public_html/V3/images/qrcode/spotcode' . $id . '.png';
+                file_paths::getRoot() . 'images/qrcode/spotcode' . $id . '.png';
         QRcode::png("http://www.spot-qr.com/spotcode.php?id=".$id."&s=true", $filename,'Q',9,1);
 
         # If you know your originals are of type PNG.
         $qrcode = imagecreatefrompng($filename);
-        $watermark = imagecreatefrompng('/home/ucwdjrrq/public_html/V3/images/qrcode/watermark.png');
+        $watermark = imagecreatefrompng(file_paths::getRoot() . 'images/qrcode/watermark.png');
         imagealphablending($watermark,true);
         imagecopymerge($qrcode, $watermark, 0, 0, 7, 4, 315, 315, 100);
 
         # Save the image to a file
-        $qrpath = 'http://spot-qr.com/V3/images/qrcode/spotcode'.$id.'.png';
-        imagepng($qrcode, '/home/ucwdjrrq/public_html/V3/images/qrcode/spotcode'.$id.'.png');
+        $qrpath = file_paths::getRoot() . 'images/qrcode/spotcode'.$id.'.png';
+        imagepng($qrcode, file_paths::getRoot() . 'images/qrcode/spotcode'.$id.'.png');
         //$imgpath = 'images/qrcode/spotcode'.$id.'.png';
                 
         return $qrpath;
