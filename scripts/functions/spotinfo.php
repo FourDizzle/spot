@@ -6,7 +6,7 @@ include_once 'main.php';
 class Spot {
     
     private $id;
-    private $name = '';
+    private $name;
     private $image_path;
     private $lat;
     private $lon;
