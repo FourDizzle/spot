@@ -1,5 +1,6 @@
 <?php
 include_once 'scripts/functions/main.php';
+include_once 'scripts/functions/directory.php';
 $functions = new Main();
 ?>
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ $(document).ready(function() {
     $('#get-spot').click(function() {
         if (numberOfSpots <= 8) {
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET","generateSpot.php",false);
+            xmlhttp.open("GET","scripts/functions/generateSpot.php",false);
             xmlhttp.send();
             xmlDoc = xmlhttp.responseXML;
             spotImagePath = 
@@ -55,7 +56,7 @@ $(document).ready(function() {
                         "<a id=\"close-panel\" href=\"#\">Close this window</a>"
                 );
                 
-                var addImageURL = "addimage.php?id="+spotIDArray[newSpotID];
+                var addImageURL = "scripts/functions/addimage.php?id="+spotIDArray[newSpotID];
                 
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", addImageURL ,false);
@@ -80,7 +81,7 @@ $(document).ready(function() {
     $('#download-spots').click(function(){
         //alert(newSpotFilePaths.join('\n'));
         var filePathPost = JSON.stringify(newSpotFilePaths);
-        $.post('zipup.php', { data : filePathPost }, function(data, success, xhr){
+        $.post('scripts/functions/zipup.php', { data : filePathPost }, function(data, success, xhr){
             var zipfilepath = "http://"+ 
                     data.getElementsByTagName("zipfilepath")[0].childNodes[0].nodeValue;
             startDownload(zipfilepath);

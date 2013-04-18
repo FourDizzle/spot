@@ -1,6 +1,6 @@
 <?php
-include_once 'scripts/functions/main.php';
-include_once 'scripts/functions/spotinfo.php';
+include_once 'main.php';
+include_once 'spotinfo.php';
 
 $functions = new Main();
 

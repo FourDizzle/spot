@@ -1,6 +1,6 @@
 <?php
-include_once 'scripts/functions/main.php';
-include_once 'scripts/functions/directory.php';
+include_once 'main.php';
+include_once 'directory.php';
 
 $functions = new Main();
 

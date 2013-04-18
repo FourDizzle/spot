@@ -3,13 +3,14 @@
 class file_paths {
     
     private static $imagesPath = 'images/';
-    private static $scriptPath = 'script/';
+    private static $scriptPath = 'scripts/';
     private static $dbName = 'conversation';
     private static $dbUserName = 'root';    
     private static $password = '';
     private static $dbPath = 'localhost';
     private static $styleSheet = 'layout/stylesheets/style.css';
     private static $root = '/spot/spot/';
+    private static $functionPath = 'scripts/functions/';
             
     static function getImagesPath() {        
         return self::$root . self::$imagesPath;
@@ -42,5 +43,13 @@ class file_paths {
     static function getRoot() {
         $directory = $_SERVER['DOCUMENT_ROOT'] . self::$root;
         return $directory;
+    }
+    
+    static function getFunctionsPath() {
+        return self::$functionPath;
+    }
+    
+    static function getServerPath() {
+        return 'localhost:81' . self::$root;
     }
 }

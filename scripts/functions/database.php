@@ -2,17 +2,18 @@
 include_once 'directory.php';
 
 class DbConnect{
-    
-    private $username = file_paths::getDbUserName;
-    private $password = file_paths::getDbPassword;
-    private $dbname = file_paths::getDbName;
-    private $dblocation = file_paths::getDbPath;
-    
+        
     static function dbLink(){
+        
+        $username = file_paths::getDbUserName();
+        $password = file_paths::getDbPassword();
+        $dbname = file_paths::getDbName();
+        $dblocation = file_paths::getDbPath();
+    
         try{
-            $link = new \PDO(   "mysql:host=$this->dblocation;dbname=$this->dbname",
-                                "$this->username",
-                                "$this->password",
+            $link = new \PDO(   "mysql:host=$dblocation;dbname=$dbname",
+                                "$username",
+                                "$password",
                                 array(
                                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                                     \PDO::ATTR_PERSISTENT => false,
