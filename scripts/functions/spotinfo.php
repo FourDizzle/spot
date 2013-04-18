@@ -31,7 +31,7 @@ class Spot {
         $this->image_path = $row['image_path'];
         $this->caption = $row['caption'];
     }
-    
+        
     function getName() {
         return $this->name;
     }

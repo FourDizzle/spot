@@ -1,10 +1,7 @@
 <?php
 
-include_once 'main.php';
 include_once 'database.php';
 include_once 'directory.php';
-
-$functions = new Main();
 
 //connect to DB
 $link = DbConnect::dbLink();
@@ -19,9 +16,15 @@ $newfilepath = file_paths::getRoot() . "images/locations/" . $filepath;
 copy(file_paths::getRoot() . "images/temporary/" . $filepath, $newfilepath);
 
 //query to change spot/location data
-$query = "UPDATE location " .
-            "SET name='$spotName', caption='$caption', image_path='$filepath' " .
-            "WHERE id=$id;";
+if ($filepath != 'none') {
+    $query = "UPDATE location " .
+                "SET name='$spotName', caption='$caption', image_path='$filepath' " .
+                "WHERE id=$id;";
+} else {
+    $query = "UPDATE location " .
+                "SET name='$spotName', caption='$caption' " .
+                "WHERE id=$id;";
+}
 
 //execute query
 $link->exec($query);

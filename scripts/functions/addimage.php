@@ -40,10 +40,11 @@ $(document).ready(function(){
         
 	var randomName = Math.floor(Math.random()*10000000001);
 	var response = '';
-	
+	var didImageChange = false;
         //shows preview of image
 	$('#userimage').change(function(){
-		var imageToUpload = document.getElementById("userimage").files[0];
+		didImageChange = true;
+                var imageToUpload = document.getElementById("userimage").files[0];
 		var formData = new FormData();
 		formData.append("file", imageToUpload);
 		formData.append("newname", randomName);
@@ -64,7 +65,11 @@ $(document).ready(function(){
                 submitData.append("id", "<?php echo $id ?>");
 		submitData.append("spotname", submitName);
 		submitData.append("caption", caption);
-		submitData.append("filename", randomName);
+		if (didImageChange) {
+                    submitData.append("filename", randomName);
+                } else {
+                    submitData.append("filename", "none");
+                }
 		var submitHttp = new XMLHttpRequest();
 		submitHttp.open("POST", "scripts/functions/submit.php", false);
 		submitHttp.send(submitData);
