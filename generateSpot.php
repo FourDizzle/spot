@@ -1,12 +1,13 @@
 <?php
-include 'scripts/functions/main.php';
+include_once 'scripts/functions/main.php';
+include_once 'scripts/functions/directory.php';
 
 $functions = new Main();
 
 $spotID = $functions->generateLocation();
 $functions->generateQR($spotID);
-$spotImagePath = 'http://spot-qr.com/V3/images/qrcode/spotcode'.$spotID.'.png';
-$spotFilePath = '/home/ucwdjrrq/public_html/V3/images/qrcode/spotcode' . $spotID . '.png';
+$spotImagePath = '/spot/spot/images/qrcode/spotcode'.$spotID.'.png';
+$spotFilePath = file_paths::getRoot() . 'images/qrcode/spotcode' . $spotID . '.png';
 
 header('Content-type: text/xml');
 echo('<spotdata>');	

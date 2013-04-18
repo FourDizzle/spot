@@ -6,7 +6,7 @@ include_once 'main.php';
 class Spot {
     
     private $id;
-    private $name;
+    private $name = '';
     private $image_path;
     private $lat;
     private $lon;
@@ -25,11 +25,11 @@ class Spot {
         $row = $results[0];
         
         //set variables to values
-        $this->name = $row[name];
-        $this->lat = $row[lat];
-        $this->lon = $row[lon];
-        $this->image_path = $row[image_path];
-        $this->caption = $row[caption];
+        $this->name = $row['name'];
+        $this->lat = $row['lat'];
+        $this->lon = $row['lon'];
+        $this->image_path = $row['image_path'];
+        $this->caption = $row['caption'];
     }
     
     function getName() {

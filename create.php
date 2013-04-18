@@ -1,5 +1,5 @@
 <?php
-include 'scripts/functions/main.php';
+include_once 'scripts/functions/main.php';
 $functions = new Main();
 ?>
 <!DOCTYPE html>
