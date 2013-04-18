@@ -52,7 +52,7 @@ $(document).ready(function() {
                 $("#lightbox, #lightbox-panel").fadeIn(300);
                 $("#lightbox-panel").html(
                         "<p>"+spotIDArray[newSpotID]+"</p>"+
-                        "<iframe src=\"addimage.php\"></iframe>"+
+                        "<iframe src=\"scripts/functions/addimage.php\"></iframe>"+
                         "<a id=\"close-panel\" href=\"#\">Close this window</a>"
                 );
                 

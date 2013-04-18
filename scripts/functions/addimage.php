@@ -17,7 +17,7 @@ $image_path = $spot->getImagePath();
 
 //if there is not image use place holder 
 if ($image_path == null) $image_path = 'images/layout/image-preview.png';
-else $image_path = substr($image_path, 6);
+else $image_path = "images/locations/" . $image_path;
 ?>
 Name: <input type="text" name="name" id="name" value="<?php echo $name; ?>"/><br />
 <image id="image-preview" src="<?php echo $image_path; ?>" alt="image preview" /><br />

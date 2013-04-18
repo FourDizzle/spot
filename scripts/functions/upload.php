@@ -1,15 +1,12 @@
 <?php
 $allowedExts = array("jpg", "jpeg", "gif", "png");
-$extension = end(explode(".", $_FILES["file"]["name"]));
-$newName = $_POST["newname"];
+$splitName = explode(".", $_FILES['file']["name"]);
+$extension = $splitName[1];
+$randString = $_POST["newname"];
 
-$randString = md5(time()); //encode the timestamp - returns a 32 chars long string
-$fileName = $_FILES["fileName"]["name"]; //the original file name
-$randString = "doodoo";
-$randString = $newName;
 $newFileName  = strtolower($randString.'.'.$extension); //join file name and ext.
 
-if ($_FILES["file"] == null) {/*echo "null";*/}
+if ($_FILES['file'] == null) {/*echo "null";*/}
 else {
 	#echo "not null";
 }

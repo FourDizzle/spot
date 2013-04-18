@@ -2,6 +2,7 @@
 
 include_once 'main.php';
 include_once 'database.php';
+include_once 'directory.php';
 
 $functions = new Main();
 
@@ -12,14 +13,14 @@ $id = $_POST['id'];
 $spotName = $_POST['spotname'];
 $caption = $_POST['caption'];
 $filepath = $_POST['filename'];
-$newfilepath = "../../images/location/" . $filepath;
+$newfilepath = file_paths::getRoot() . "images/locations/" . $filepath;
 
 //Move temporary image to permanant location
-copy("../../images/temporary/" . $filepath, $newfilepath);
+copy(file_paths::getRoot() . "images/temporary/" . $filepath, $newfilepath);
 
 //query to change spot/location data
 $query = "UPDATE location " .
-            "SET name='$spotName', caption='$caption', image_path='$newfilepath' " .
+            "SET name='$spotName', caption='$caption', image_path='$filepath' " .
             "WHERE id=$id;";
 
 //execute query
