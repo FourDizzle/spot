@@ -8,7 +8,7 @@ $functions = new Main();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="<?php $functions->getStylesheet(); ?>">
 <title>Spot - Create a New Spot</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
 $(document).ready(function() {
@@ -82,7 +82,7 @@ $(document).ready(function() {
         //alert(newSpotFilePaths.join('\n'));
         var filePathPost = JSON.stringify(newSpotFilePaths);
         $.post('scripts/functions/zipup.php', { data : filePathPost }, function(data, success, xhr){
-            var zipfilepath = "http://"+ 
+            var zipfilepath = //"http://"+ 
                     data.getElementsByTagName("zipfilepath")[0].childNodes[0].nodeValue;
             startDownload(zipfilepath);
         }, 'xml');

@@ -9,7 +9,7 @@ class file_paths {
     private static $password = '';
     private static $dbPath = 'localhost';
     private static $styleSheet = 'layout/stylesheets/style.css';
-    private static $root = '/spot/spot/';
+    private static $root = '/spot/';
     private static $functionPath = 'scripts/functions/';
             
     static function getImagesPath() {        
@@ -50,6 +50,6 @@ class file_paths {
     }
     
     static function getServerPath() {
-        return 'localhost:81' . self::$root;
+        return 'http://localhost' . self::$root;
     }
 }
