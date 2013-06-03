@@ -1,2 +1,7 @@
+#qrcodes
 images/temporary/*
 images/qrcode/*
+
+#qrcode errors
+*.png-errors.txt
+
