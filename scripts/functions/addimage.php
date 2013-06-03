@@ -19,9 +19,12 @@ $image_path = $spot->getImagePath();
 if ($image_path == null) $image_path = 'images/layout/image-preview.png';
 else $image_path = "images/locations/" . $image_path;
 ?>
-Name: <input type="text" name="name" id="name" value="<?php echo $name; ?>"/><br />
+<div id="close"><a id="close-panel" href="#">[close]</a></div>
+<label>Name:</label>
+	<input type="text" name="name" id="name" value="<?php echo $name; ?>"/><br />
 <image id="image-preview" src="<?php echo $image_path; ?>" alt="image preview" /><br />
-Caption: <textarea name="caption" id="caption"><?php echo $caption; ?></textarea>
+<label>Caption:</label>
+	<textarea name="caption" id="caption"><?php echo $caption; ?></textarea>
         
         
         
