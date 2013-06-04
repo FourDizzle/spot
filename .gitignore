@@ -1,6 +1,7 @@
 #qrcodes
 images/temporary/*
 images/qrcode/*
+images/locations/*
 
 #qrcode errors
 *.png-errors.txt

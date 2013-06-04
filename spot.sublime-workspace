@@ -1,0 +1,697 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"name",
+				"name"
+			],
+			[
+				"A",
+				"AS"
+			],
+			[
+				"Ca",
+				"CallEvent"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "scripts/functions/comments.php",
+			"settings":
+			{
+				"buffer_size": 542,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "array(2) { \n	[0]=> object(stdClass)#3 (5) { \n		[\"id\"]=> string(2) \"76\" \n		[\"location_id\"]=> string(1) \"1\" \n		[\"postdate\"]=> string(19) \"2013-06-04 10:29:18\" \n		[\"name\"]=> string(4) \"Nick\" \n		[\"message\"]=> string(11) \"TESTING 123\" \n		} [1]=> object(stdClass)#4 (5) { [\"id\"]=> string(2) \"77\" [\"location_id\"]=> string(1) \"1\" [\"postdate\"]=> string(19) \"2013-06-04 10:29:25\" [\"name\"]=> string(4) \"Nick\" [\"message\"]=> string(11) \"TESTING 123\" } } ",
+			"settings":
+			{
+				"buffer_size": 441,
+				"line_ending": "Windows",
+				"name": "array(2) {"
+			}
+		},
+		{
+			"contents": "<?php\n\ninclude_once 'database.php';\ninclude_once 'main.php';\n\nclass Spot {\n    \n    private $id;\n    private $name;\n    private $image_path;\n    private $lat;\n    private $lon;\n    private $caption;\n    \n    function __construct($id) {\n        //establish DB connection\n        $link = DbConnect::dbLink();\n        \n        //query to select spot\n        $query = \"SELECT * FROM location WHERE id = $id;\";\n        $handle = $link->query($query);\n        \n        //put results into array and grab the first row\n        $results = $handle->fetchAll(PDO::FETCH_ASSOC);\n        $row = $results[0];\n        //set variables to values\n        $this->name = $row['name'];\n        $this->lat = $row['lat'];\n        $this->lon = $row['lon'];\n        $this->image_path = $row['image_path'];\n        $this->caption = $row['caption'];\n    }\n        \n    function getName() {\n        return $this->name;\n    }\n    \n    function getLat() {\n        return $this->lat;\n    }\n    \n    function getLon() {\n        return $this->lon;\n    }\n    \n    function getImagePath() {\n        return $this->image_path;\n    }\n    \n    function getCaption() {\n        return $this->caption;\n    }\n}\n",
+			"file": "scripts/functions/spotinfo.php",
+			"file_size": 1231,
+			"file_write_time": 130147438031773732,
+			"settings":
+			{
+				"buffer_size": 1168,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php \ninclude_once 'scripts/functions/comments.php';\ninclude_once 'scripts/functions/main.php';\ninclude_once 'scripts/functions/spotinfo.php';\n\n// Get id number of spot\n$location_id = $_GET['id'];\n// Get spot info from id number\n$spot = new Spot($location_id);\n\n$functions = new Main();\n$functions->getHeader(\"Location\" . $spot->getName());\n?>\n	<body>\n		<div id=\"main\">\n			<div id=\"header-regular\">\n		    	<h1 id=\"regular\"><?php echo $spot->getName(); ?></h1>\n		    </div>\n		    \n		    <div id=\"navigation\">\n		    	<ul>\n		        	<li><a href=\"index.php\">Home</a></li>\n		            <li><a href=\"create.php\">Create New Spot</a></li>\n		        </ul>\n		    </div>\n		    \n		    <div id=\"content\">\n\n				<div id = \"comments\">\n					<?php \n					$comments = Comments::grabComments($location_id);\n					foreach ($comments as $row) {\n						echo \"<div class=\\\"comment\\\">\\n\";\n						echo \"<h4>\" . $row->name . \"</h4>\\n\";\n						echo \"<span class=\\\"comment-date\\\">\" . $row->postdate . \"</span>\\n\";\n						echo \"<p>\" . $row->message . \"</p>\\n\";\n						echo \"</div>\\n\";\n					} ?>\n				</div>\n				<div id=\"add-comment\">\n					<form>\n						<label>Name:</label>\n							<input type=\"text\" id=\"name\" />\n						<label>Message:</label>\n							<input type=\"text\" id=\"message\" />\n					</form>\n				</div>\n			</div>\n	</div>\n	</body>\n</html>",
+			"file": "location.php",
+			"file_size": 1335,
+			"file_write_time": 130148475895383209,
+			"settings":
+			{
+				"buffer_size": 1307,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 97,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php\ninclude_once 'scripts/functions/main.php';\ninclude_once 'scripts/functions/directory.php';\n$functions = new Main();\n$functions->getHeader(\"Create New Spot\");\n?>\n\n<body>\n<div id=\"main\">\n\n	<div id=\"header-regular\">\n    	<h1 id=\"regular\">Create a New Spot</h1>\n    </div>\n    \n    <div id=\"navigation\">\n    	<ul>\n        	<li><a href=\"index.php\">Home</a></li>\n            <li><a href=\"create.php\">Create New Spot</a></li>\n        </ul>\n    </div>\n    \n    <div id=\"content\">\n    	<div id=\"newspotform\" class=\"step\">\n            <h3>Generate QR Codes</h3>\n            <p>Click \"Generate New Spot\" to create a \n                unique but empty spot for you to fill\n                with your art or sound. You can create\n                a total of nine spots at any one time.\n                Click download when you're done.\n            </p>\n            <button id=\"get-spot\">Generate New Spot</button>\n            <button id=\"download-spots\">Download</button> \n        </div>\n        <div id=\"spot-preview\"></div>\n    </div>\n    \n    <div id=\"footer\">\n    	<div id=\"footer-navigation\">\n            <ul>\n                <li><a href=\"index.php\">Home</a></li>\n                <li><a href=\"create.php\">Create New Spot</a></li>\n                <li><a href=\"create.php\">Contact</a></li>\n            </ul>\n    	</div>\n        <p>Copyright 2013 - Nick Cassiani</p>\n    </div>\n</div>\n<div id=\"lightbox-panel\">  \n    <h2>Lightbox Panel</h2>  \n    <p>You can add any valid content here.</p>  \n    <p align=\"center\">  \n        <a id=\"close-panel\" href=\"#\">Close this window</a>  \n    </p>  \n</div>  \n<div id=\"lightbox\"> </div>\n<input type=\"file\" name=\"image\" id=\"userimage\" />\n<script>\n$(document).ready(function() {\n    \n    var newSpotFilePaths = new Array();\n    var numberOfSpots = 0;\n    var spotIDArray = new Array();\n    var newSpotID = 0;\n    \n    function startDownload(url) { \n        window.location.assign(url);\n    }\n\n    $('#get-spot').click(function() {\n        if (numberOfSpots <= 8) {\n            var xmlhttp = new XMLHttpRequest();\n            xmlhttp.open(\"GET\",\"scripts/functions/generateSpot.php\",false);\n            xmlhttp.send();\n            xmlDoc = xmlhttp.responseXML;\n            spotImagePath = \n                xmlDoc.getElementsByTagName(\"SpotImagePath\")[0].childNodes[0].nodeValue;\n            spotFilePath = \n                    xmlDoc.getElementsByTagName(\"SpotFilePath\")[0].childNodes[0].nodeValue;\n            spotID = \n                    xmlDoc.getElementsByTagName(\"SpotID\")[0].childNodes[0].nodeValue;\n            \n            spotIDArray.push(spotID);\n            newSpotFilePaths.push(spotFilePath);            \n            \n            var preview = \"<div class=\\\"newspot\\\" id=\\\"\"+numberOfSpots+\"\\\">\"+\n                \"   <img class=\\\"showspot\\\" src=\\\"\"+spotImagePath+\"\\\" />\"+\n                \"</div>\";  \n            \n            numberOfSpots++; \n            \n            $(preview).hide().appendTo('#spot-preview').fadeIn(1000);\n         \n             //on click of QR Code get its unique id and insert for to edit\n             $(\".newspot\").click(function(){  \n                newSpotID = $(this).attr('id');\n                $(\"#lightbox, #lightbox-panel\").fadeIn(300);\n                $(\"#lightbox-panel\").html(\n                        \"<p>\"+spotIDArray[newSpotID]+\"</p>\"+\n                        \"<iframe src=\\\"scripts/functions/addimage.php\\\"></iframe>\"+\n                        \"<a id=\\\"close-panel\\\" href=\\\"#\\\">Close this window</a>\"\n                );\n                \n                var addImageURL = \"scripts/functions/addimage.php?id=\"+spotIDArray[newSpotID];\n                \n                var xhr = new XMLHttpRequest();\n                xhr.open(\"GET\", addImageURL ,false);\n                xhr.send();\n                var innerHtml = xhr.responseText;\n                \n                $(\"#lightbox-panel\").html(innerHtml);                \n                //Jquery for light box\n                         \n                //end of light box behavior\n                $(\"a#close-panel\").click(function(){  \n                    $(\"#lightbox, #lightbox-panel\").fadeOut(300);  \n                });\n             });\n            \n             $(\"a#close-panel\").click(function(){  \n                 $(\"#lightbox, #lightbox-panel\").fadeOut(300);  \n             });\n        }\n    });\n    \n    $('#download-spots').click(function(){\n        //alert(newSpotFilePaths.join('\\n'));\n        var filePathPost = JSON.stringify(newSpotFilePaths);\n        $.post('scripts/functions/zipup.php', { data : filePathPost }, function(data, success, xhr){\n            var zipfilepath = //\"http://\"+ \n                    data.getElementsByTagName(\"zipfilepath\")[0].childNodes[0].nodeValue;\n            startDownload(zipfilepath);\n        }, 'xml');\n    }); \n});\n</script>\n</body>\n</html>",
+			"file": "create.php",
+			"file_size": 5281,
+			"file_write_time": 130148459205778618,
+			"settings":
+			{
+				"buffer_size": 4809,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/addimage.php",
+			"settings":
+			{
+				"buffer_size": 2983,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/submit.php",
+			"settings":
+			{
+				"buffer_size": 817,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/main.php",
+			"settings":
+			{
+				"buffer_size": 4677,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+			[
+				"ssphp",
+				"Set Syntax: PHP"
+			],
+			[
+				"tidy",
+				"Tidy PHP"
+			],
+			[
+				"tidy css",
+				"Tidy CSS (Low Compression)"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"cssti",
+				"Tidy CSS (Highest Compression)"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"sscss",
+				"Set Syntax: CSS"
+			],
+			[
+				"pro",
+				"Project: Save As"
+			],
+			[
+				"for",
+				"FormatSQL: Format SQL statement"
+			],
+			[
+				"ss",
+				"Set Syntax: SQL"
+			],
+			[
+				"fo",
+				"FormatSQL: Format SQL statement"
+			],
+			[
+				"sssql",
+				"Set Syntax: SQL"
+			],
+			[
+				"php",
+				"Tidy PHP"
+			],
+			[
+				"f",
+				"FormatSQL: Format SQL statement"
+			],
+			[
+				"sssq",
+				"Set Syntax: SQL"
+			],
+			[
+				"ssj",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"",
+				"Snippet: #!/usr/bin/env"
+			],
+			[
+				"For",
+				"Format: Javascript"
+			],
+			[
+				"F",
+				"Format: Javascript"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Nick/Projects/SIP JUnit/jain-sip-android/shootme/src/examples/simplecallsetup/Shootme.java",
+		"/C/Users/Nick/AppData/Local/Temp/comments.sql",
+		"/C/xampp/htdocs/spot/scripts/functions/directory.php",
+		"/C/xampp/htdocs/spot/scripts/functions/main.php",
+		"/C/xampp/htdocs/spot/location.php",
+		"/C/xampp/htdocs/spot/scripts/functions/comments.php",
+		"/C/xampp/htdocs/spot/scripts/functions/generateSpot.php",
+		"/C/xampp/htdocs/spot/create.php",
+		"/C/xampp/htdocs/spot/scripts/functions/addimage.php",
+		"/C/xampp/htdocs/spot/index.php",
+		"/C/xampp/htdocs/spot/layout/stylesheets/style.css",
+		"/C/xampp/htdocs/spot/spot.sublime-workspace",
+		"/C/Users/Nick/Documents/script.js",
+		"/C/Users/Nick/Documents/index.html",
+		"/C/Users/Nick/Projects/Daughters of Charity/server/tomcat/webapps/DaughtersOfCharity/WEB-INF/config.properties",
+		"/C/Users/Nick/Projects/OCWUT/source/WT_IVR_Java/src/com/spinsci/ocwut/jsc/ws/util/Encryption128Bit.java",
+		"/C/Users/Nick/Projects/SpinSci Tools/spinsci-tools-0.1",
+		"/C/Users/Nick/Projects/SpinSci Tools/SpinSci-Tools/.project",
+		"/C/Users/Nick/Projects/SpinSci Tools/SpinSci-Tools/.classpath",
+		"/C/Users/Nick/Projects/Daughters of Charity/server/tomcat/webapps/DaughtersOfCharity/WEB-INF/.config",
+		"/C/Users/Nick/Projects/Daughters of Charity/Workspace/DaughtersOfCharity/WebContent/WEB-INF/.config"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\"",
+			"scripts",
+			"TerminalConnection to Terminal",
+			"TermObservationEndedEvImpl received",
+			"ermObservationEndedEvImpl received",
+			".*47000833500.*",
+			".*47000833495.*",
+			"(.*47000833495.*|.*4054841523.*)",
+			"4054241523",
+			"  EndCallDAO.setConnectionString(DBURL);\n  EndCallDAO.insertCall(CallHistory,ANI,DNIS,CallType);\n}",
+			"CallStart",
+			"location",
+			"protocol",
+			"3300129",
+			"3300100",
+			"\"\n",
+			"\\<",
+			"\\n",
+			".*73862.*",
+			"391047973: May 31 09:24:09.167 CDT %MIVR-ENG-7-UNK:Execute step of Task 47000834632 : Do {",
+			".*47000834632.*",
+			"73862",
+			"error",
+			".*47000807164.*",
+			"4058422310",
+			"376883612: May 29 13:07:44.974 CDT %MIVR-ENG-7-UNK:Execute step of Task 47000804048 : CALLER_HANGUP:",
+			".*47000804048.*",
+			"4058502253",
+			".*47000802100.*",
+			"11:59:44.160",
+			".*47000802100.*",
+			"11:59:44",
+			"11:59:44.160",
+			"47000802100",
+			".*47000802100.*",
+			"4052297997",
+			"47000802100",
+			".*47000802100.*",
+			"4052297997",
+			".*47000802100.*",
+			"4052297997",
+			".*Do CallHistory.add.*",
+			".*47000802889.*",
+			"4054243447",
+			".*47000802342.*",
+			"2817707873",
+			".*47000787049.*",
+			"358368711: May 26 13:18:15.997 CDT %MIVR-ENG-7-UNK:Execute step of Task 47000766632 : Upload Prompt (recording to L[en_US], \"WT\\\"+selectPrompt+\".wav\")",
+			".*47000766632.*",
+			"9405976467",
+			".*47000726020.*",
+			"2817707873",
+			".*47000726011.*",
+			"2817707873",
+			".*47000725885.*",
+			"2817707873",
+			".*47000725842.*",
+			"2817707873",
+			".*47000725737.*",
+			"2817707873",
+			"281(?\\?)",
+			"281(?7707873)",
+			"281",
+			"7777(?!:)",
+			"7777",
+			"7777(?!:)",
+			"7777",
+			".*(47000725379).*",
+			"Digit received: 7",
+			"5050",
+			"7777",
+			"(?<=(prompt.*))7777",
+			"(?<=.*Prompt.*)7777",
+			"7777",
+			"777",
+			".*(47000725094).*",
+			"5050",
+			"DAO",
+			"Exception",
+			"nested",
+			".*47000707602.*",
+			"281770",
+			".*do not override hibernate.transaction.*",
+			"(?<=Execute step of Task 187000000140 : ).*|(Normal Keys collected: ).*|(?<=Task: 187000000140 ).*",
+			"(?<=Execute step of Task 187000000140 : ).*|(?<=Task:187000000140 )Digit received: .|(?<=Task: 187000000140 ).*",
+			"(?<=<)(\\w+)|(?<=</)\\1",
+			"(?<=<)(\\w*)|(?<=</)\\1",
+			"(?<=Execute step of Task 187000000140 : ).*|(?<=Task:187000000140 )Digit received: .",
+			"(?<=Execute step of Task 187000000140 : ).*",
+			".*: ",
+			"(?:.*Execute step of Task 187000000140 : )(.*)||(?:.*Task:187000000140 Digit received: )(.*)",
+			"(?:.*Execute step of Task 187000000140 : )(.*)||(?:.*Task:187000000140)(.*)",
+			"</(\\w*)>",
+			"<(\\w*)>",
+			"<(poop)>",
+			"<(\\w*)>",
+			".*187000000140.*",
+			"^.*Execute step of Task 187000000140 : ",
+			"^.*(Execute step of Task 187000000140 : )(.*)$",
+			"^.*(Execute step of Task 187000000140).*$",
+			"record",
+			"task",
+			"record",
+			"\\n",
+			" = ",
+			" - ",
+			"^1",
+			", ",
+			"\\n",
+			"/n",
+			"(byte)",
+			",",
+			"(byte)",
+			"0x",
+			", (byte)"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"', '",
+			"wat:\\1",
+			"</wat:\\1>",
+			"<wat:\\1>",
+			"<wat:\\/1>",
+			"<wat:\\1>",
+			"<wat:\\/1>",
+			"<wat:/1>",
+			"",
+			"\");\\n",
+			"\", \"",
+			"errorTable.put(\"1",
+			"\", \"",
+			", ",
+			"",
+			" "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "scripts/functions/comments.php",
+					"settings":
+					{
+						"buffer_size": 542,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								519,
+								519
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								44,
+								44
+							]
+						],
+						"settings":
+						{
+							"auto_name": "array(2) {",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "scripts/functions/spotinfo.php",
+					"settings":
+					{
+						"buffer_size": 1168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								594,
+								594
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "location.php",
+					"settings":
+					{
+						"buffer_size": 1307,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1276,
+								1276
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 493.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": ".gitignore",
+					"settings":
+					{
+						"buffer_size": 97,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "create.php",
+					"settings":
+					{
+						"buffer_size": 4809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								193,
+								477
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "scripts/functions/addimage.php",
+					"settings":
+					{
+						"buffer_size": 2983,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "scripts/functions/submit.php",
+					"settings":
+					{
+						"buffer_size": 817,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								112,
+								112
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "scripts/functions/main.php",
+					"settings":
+					{
+						"buffer_size": 4677,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4513,
+								4513
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 9.0,
+						"translation.y": 2052.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

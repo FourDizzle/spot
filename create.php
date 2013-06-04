@@ -2,15 +2,66 @@
 include_once 'scripts/functions/main.php';
 include_once 'scripts/functions/directory.php';
 $functions = new Main();
+$functions->getHeader("Create New Spot");
 ?>
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="<?php $functions->getStylesheet(); ?>">
 <title>Spot - Create a New Spot</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>-->
 
+<body>
+<div id="main">
+
+	<div id="header-regular">
+    	<h1 id="regular">Create a New Spot</h1>
+    </div>
+    
+    <div id="navigation">
+    	<ul>
+        	<li><a href="index.php">Home</a></li>
+            <li><a href="create.php">Create New Spot</a></li>
+        </ul>
+    </div>
+    
+    <div id="content">
+    	<div id="newspotform" class="step">
+            <h3>Generate QR Codes</h3>
+            <p>Click "Generate New Spot" to create a 
+                unique but empty spot for you to fill
+                with your art or sound. You can create
+                a total of nine spots at any one time.
+                Click download when you're done.
+            </p>
+            <button id="get-spot">Generate New Spot</button>
+            <button id="download-spots">Download</button> 
+        </div>
+        <div id="spot-preview"></div>
+    </div>
+    
+    <div id="footer">
+    	<div id="footer-navigation">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="create.php">Create New Spot</a></li>
+                <li><a href="create.php">Contact</a></li>
+            </ul>
+    	</div>
+        <p>Copyright 2013 - Nick Cassiani</p>
+    </div>
+</div>
+<div id="lightbox-panel">  
+    <h2>Lightbox Panel</h2>  
+    <p>You can add any valid content here.</p>  
+    <p align="center">  
+        <a id="close-panel" href="#">Close this window</a>  
+    </p>  
+</div>  
+<div id="lightbox"> </div>
+<input type="file" name="image" id="userimage" />
 <script>
 $(document).ready(function() {
     
@@ -90,59 +141,5 @@ $(document).ready(function() {
     }); 
 });
 </script>
-<script>
-    
-</script>
-</head>
-
-<body>
-<div id="main">
-
-	<div id="header-regular">
-    	<h1 id="regular">Create a New Spot</h1>
-    </div>
-    
-    <div id="navigation">
-    	<ul>
-        	<li><a href="index.php">Home</a></li>
-            <li><a href="create.php">Create New Spot</a></li>
-        </ul>
-    </div>
-    
-    <div id="content">
-    	<div id="newspotform" class="step">
-            <h3>Generate QR Codes</h3>
-            <p>Click "Generate New Spot" to create a 
-                unique but empty spot for you to fill
-                with your art or sound. You can create
-                a total of nine spots at any one time.
-                Click download when you're done.
-            </p>
-            <button id="get-spot">Generate New Spot</button>
-            <button id="download-spots">Download</button> 
-        </div>
-        <div id="spot-preview"></div>
-    </div>
-    
-    <div id="footer">
-    	<div id="footer-navigation">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="create.php">Create New Spot</a></li>
-                <li><a href="create.php">Contact</a></li>
-            </ul>
-    	</div>
-        <p>Copyright 2013 - Nick Cassiani</p>
-    </div>
-</div>
-<div id="lightbox-panel">  
-    <h2>Lightbox Panel</h2>  
-    <p>You can add any valid content here.</p>  
-    <p align="center">  
-        <a id="close-panel" href="#">Close this window</a>  
-    </p>  
-</div>  
-<div id="lightbox"> </div>
-<input type="file" name="image" id="userimage" />
 </body>
 </html>
