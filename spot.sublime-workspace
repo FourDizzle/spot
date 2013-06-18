@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ma",
+				"max-width"
+			],
+			[
 				"name",
 				"name"
 			],
@@ -23,91 +27,65 @@
 			"file": "scripts/functions/comments.php",
 			"settings":
 			{
-				"buffer_size": 542,
+				"buffer_size": 850,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "array(2) { \n	[0]=> object(stdClass)#3 (5) { \n		[\"id\"]=> string(2) \"76\" \n		[\"location_id\"]=> string(1) \"1\" \n		[\"postdate\"]=> string(19) \"2013-06-04 10:29:18\" \n		[\"name\"]=> string(4) \"Nick\" \n		[\"message\"]=> string(11) \"TESTING 123\" \n		} [1]=> object(stdClass)#4 (5) { [\"id\"]=> string(2) \"77\" [\"location_id\"]=> string(1) \"1\" [\"postdate\"]=> string(19) \"2013-06-04 10:29:25\" [\"name\"]=> string(4) \"Nick\" [\"message\"]=> string(11) \"TESTING 123\" } } ",
+			"file": "scripts/functions/postcomment.php",
 			"settings":
 			{
-				"buffer_size": 441,
-				"line_ending": "Windows",
-				"name": "array(2) {"
-			}
-		},
-		{
-			"contents": "<?php\n\ninclude_once 'database.php';\ninclude_once 'main.php';\n\nclass Spot {\n    \n    private $id;\n    private $name;\n    private $image_path;\n    private $lat;\n    private $lon;\n    private $caption;\n    \n    function __construct($id) {\n        //establish DB connection\n        $link = DbConnect::dbLink();\n        \n        //query to select spot\n        $query = \"SELECT * FROM location WHERE id = $id;\";\n        $handle = $link->query($query);\n        \n        //put results into array and grab the first row\n        $results = $handle->fetchAll(PDO::FETCH_ASSOC);\n        $row = $results[0];\n        //set variables to values\n        $this->name = $row['name'];\n        $this->lat = $row['lat'];\n        $this->lon = $row['lon'];\n        $this->image_path = $row['image_path'];\n        $this->caption = $row['caption'];\n    }\n        \n    function getName() {\n        return $this->name;\n    }\n    \n    function getLat() {\n        return $this->lat;\n    }\n    \n    function getLon() {\n        return $this->lon;\n    }\n    \n    function getImagePath() {\n        return $this->image_path;\n    }\n    \n    function getCaption() {\n        return $this->caption;\n    }\n}\n",
-			"file": "scripts/functions/spotinfo.php",
-			"file_size": 1231,
-			"file_write_time": 130147438031773732,
-			"settings":
-			{
-				"buffer_size": 1168,
+				"buffer_size": 170,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "<?php \ninclude_once 'scripts/functions/comments.php';\ninclude_once 'scripts/functions/main.php';\ninclude_once 'scripts/functions/spotinfo.php';\n\n// Get id number of spot\n$location_id = $_GET['id'];\n// Get spot info from id number\n$spot = new Spot($location_id);\n\n$functions = new Main();\n$functions->getHeader(\"Location\" . $spot->getName());\n?>\n	<body>\n		<div id=\"main\">\n			<div id=\"header-regular\">\n		    	<h1 id=\"regular\"><?php echo $spot->getName(); ?></h1>\n		    </div>\n		    \n		    <div id=\"navigation\">\n		    	<ul>\n		        	<li><a href=\"index.php\">Home</a></li>\n		            <li><a href=\"create.php\">Create New Spot</a></li>\n		        </ul>\n		    </div>\n		    \n		    <div id=\"content\">\n\n				<div id = \"comments\">\n					<?php \n					$comments = Comments::grabComments($location_id);\n					foreach ($comments as $row) {\n						echo \"<div class=\\\"comment\\\">\\n\";\n						echo \"<h4>\" . $row->name . \"</h4>\\n\";\n						echo \"<span class=\\\"comment-date\\\">\" . $row->postdate . \"</span>\\n\";\n						echo \"<p>\" . $row->message . \"</p>\\n\";\n						echo \"</div>\\n\";\n					} ?>\n				</div>\n				<div id=\"add-comment\">\n					<form>\n						<label>Name:</label>\n							<input type=\"text\" id=\"name\" />\n						<label>Message:</label>\n							<input type=\"text\" id=\"message\" />\n					</form>\n				</div>\n			</div>\n	</div>\n	</body>\n</html>",
 			"file": "location.php",
-			"file_size": 1335,
-			"file_write_time": 130148475895383209,
 			"settings":
 			{
-				"buffer_size": 1307,
+				"buffer_size": 1733,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": ".gitignore",
+			"file": "layout/stylesheets/style.css",
 			"settings":
 			{
-				"buffer_size": 97,
+				"buffer_size": 5693,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "<?php\ninclude_once 'scripts/functions/main.php';\ninclude_once 'scripts/functions/directory.php';\n$functions = new Main();\n$functions->getHeader(\"Create New Spot\");\n?>\n\n<body>\n<div id=\"main\">\n\n	<div id=\"header-regular\">\n    	<h1 id=\"regular\">Create a New Spot</h1>\n    </div>\n    \n    <div id=\"navigation\">\n    	<ul>\n        	<li><a href=\"index.php\">Home</a></li>\n            <li><a href=\"create.php\">Create New Spot</a></li>\n        </ul>\n    </div>\n    \n    <div id=\"content\">\n    	<div id=\"newspotform\" class=\"step\">\n            <h3>Generate QR Codes</h3>\n            <p>Click \"Generate New Spot\" to create a \n                unique but empty spot for you to fill\n                with your art or sound. You can create\n                a total of nine spots at any one time.\n                Click download when you're done.\n            </p>\n            <button id=\"get-spot\">Generate New Spot</button>\n            <button id=\"download-spots\">Download</button> \n        </div>\n        <div id=\"spot-preview\"></div>\n    </div>\n    \n    <div id=\"footer\">\n    	<div id=\"footer-navigation\">\n            <ul>\n                <li><a href=\"index.php\">Home</a></li>\n                <li><a href=\"create.php\">Create New Spot</a></li>\n                <li><a href=\"create.php\">Contact</a></li>\n            </ul>\n    	</div>\n        <p>Copyright 2013 - Nick Cassiani</p>\n    </div>\n</div>\n<div id=\"lightbox-panel\">  \n    <h2>Lightbox Panel</h2>  \n    <p>You can add any valid content here.</p>  \n    <p align=\"center\">  \n        <a id=\"close-panel\" href=\"#\">Close this window</a>  \n    </p>  \n</div>  \n<div id=\"lightbox\"> </div>\n<input type=\"file\" name=\"image\" id=\"userimage\" />\n<script>\n$(document).ready(function() {\n    \n    var newSpotFilePaths = new Array();\n    var numberOfSpots = 0;\n    var spotIDArray = new Array();\n    var newSpotID = 0;\n    \n    function startDownload(url) { \n        window.location.assign(url);\n    }\n\n    $('#get-spot').click(function() {\n        if (numberOfSpots <= 8) {\n            var xmlhttp = new XMLHttpRequest();\n            xmlhttp.open(\"GET\",\"scripts/functions/generateSpot.php\",false);\n            xmlhttp.send();\n            xmlDoc = xmlhttp.responseXML;\n            spotImagePath = \n                xmlDoc.getElementsByTagName(\"SpotImagePath\")[0].childNodes[0].nodeValue;\n            spotFilePath = \n                    xmlDoc.getElementsByTagName(\"SpotFilePath\")[0].childNodes[0].nodeValue;\n            spotID = \n                    xmlDoc.getElementsByTagName(\"SpotID\")[0].childNodes[0].nodeValue;\n            \n            spotIDArray.push(spotID);\n            newSpotFilePaths.push(spotFilePath);            \n            \n            var preview = \"<div class=\\\"newspot\\\" id=\\\"\"+numberOfSpots+\"\\\">\"+\n                \"   <img class=\\\"showspot\\\" src=\\\"\"+spotImagePath+\"\\\" />\"+\n                \"</div>\";  \n            \n            numberOfSpots++; \n            \n            $(preview).hide().appendTo('#spot-preview').fadeIn(1000);\n         \n             //on click of QR Code get its unique id and insert for to edit\n             $(\".newspot\").click(function(){  \n                newSpotID = $(this).attr('id');\n                $(\"#lightbox, #lightbox-panel\").fadeIn(300);\n                $(\"#lightbox-panel\").html(\n                        \"<p>\"+spotIDArray[newSpotID]+\"</p>\"+\n                        \"<iframe src=\\\"scripts/functions/addimage.php\\\"></iframe>\"+\n                        \"<a id=\\\"close-panel\\\" href=\\\"#\\\">Close this window</a>\"\n                );\n                \n                var addImageURL = \"scripts/functions/addimage.php?id=\"+spotIDArray[newSpotID];\n                \n                var xhr = new XMLHttpRequest();\n                xhr.open(\"GET\", addImageURL ,false);\n                xhr.send();\n                var innerHtml = xhr.responseText;\n                \n                $(\"#lightbox-panel\").html(innerHtml);                \n                //Jquery for light box\n                         \n                //end of light box behavior\n                $(\"a#close-panel\").click(function(){  \n                    $(\"#lightbox, #lightbox-panel\").fadeOut(300);  \n                });\n             });\n            \n             $(\"a#close-panel\").click(function(){  \n                 $(\"#lightbox, #lightbox-panel\").fadeOut(300);  \n             });\n        }\n    });\n    \n    $('#download-spots').click(function(){\n        //alert(newSpotFilePaths.join('\\n'));\n        var filePathPost = JSON.stringify(newSpotFilePaths);\n        $.post('scripts/functions/zipup.php', { data : filePathPost }, function(data, success, xhr){\n            var zipfilepath = //\"http://\"+ \n                    data.getElementsByTagName(\"zipfilepath\")[0].childNodes[0].nodeValue;\n            startDownload(zipfilepath);\n        }, 'xml');\n    }); \n});\n</script>\n</body>\n</html>",
-			"file": "create.php",
-			"file_size": 5281,
-			"file_write_time": 130148459205778618,
+			"file": "/C/Users/Nick/hellocpp.cpp",
 			"settings":
 			{
-				"buffer_size": 4809,
+				"buffer_size": 119,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "scripts/functions/addimage.php",
+			"contents": "",
+			"file": "/C/Users/Nick/goodbye.c",
+			"file_size": 194,
+			"file_write_time": 130149711664179079,
 			"settings":
 			{
-				"buffer_size": 2983,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "scripts/functions/submit.php",
-			"settings":
-			{
-				"buffer_size": 817,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "scripts/functions/main.php",
-			"settings":
-			{
-				"buffer_size": 4677,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "#include <windows.h>"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 58.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"ssc",
+				"Set Syntax: C"
+			],
 			[
 				"ssphp",
 				"Set Syntax: PHP"
@@ -202,15 +180,24 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Nick/fileread.c",
+		"/C/Users/Nick/helloworld.c",
+		"/C/MinGW/helloworld.c",
+		"/C/Users/Nick/Desktop/Infoscoop3/apache-tomcat-6.0.28/conf/tomcat-users.xml",
+		"/C/MinGW/msys/1.0/etc/fstab",
+		"/C/xampp/htdocs/spot/scripts/functions/submit.php",
+		"/C/xampp/htdocs/spot/scripts/functions/main.php",
+		"/C/xampp/htdocs/spot/create.php",
+		"/C/xampp/htdocs/spot/scripts/functions/directory.php",
+		"/C/xampp/htdocs/spot/scripts/functions/addimage.php",
+		"/C/Infoscoop3/apache-tomcat-6.0.28/conf/server.xml",
+		"/C/xampp/htdocs/spot/location.php",
+		"/C/xampp/htdocs/spot/scripts/functions/spotinfo.php",
+		"/C/xampp/htdocs/spot/.gitignore",
 		"/C/Users/Nick/Projects/SIP JUnit/jain-sip-android/shootme/src/examples/simplecallsetup/Shootme.java",
 		"/C/Users/Nick/AppData/Local/Temp/comments.sql",
-		"/C/xampp/htdocs/spot/scripts/functions/directory.php",
-		"/C/xampp/htdocs/spot/scripts/functions/main.php",
-		"/C/xampp/htdocs/spot/location.php",
 		"/C/xampp/htdocs/spot/scripts/functions/comments.php",
 		"/C/xampp/htdocs/spot/scripts/functions/generateSpot.php",
-		"/C/xampp/htdocs/spot/create.php",
-		"/C/xampp/htdocs/spot/scripts/functions/addimage.php",
 		"/C/xampp/htdocs/spot/index.php",
 		"/C/xampp/htdocs/spot/layout/stylesheets/style.css",
 		"/C/xampp/htdocs/spot/spot.sublime-workspace",
@@ -240,6 +227,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"iostream",
+			"dhcp",
+			"10.2.0.2",
+			"dns",
 			"\"",
 			"scripts",
 			"TerminalConnection to Terminal",
@@ -357,7 +348,7 @@
 			", (byte)"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": true,
 		"replace_history":
@@ -388,7 +379,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -396,15 +387,15 @@
 					"file": "scripts/functions/comments.php",
 					"settings":
 					{
-						"buffer_size": 542,
+						"buffer_size": 850,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								519,
-								519
+								845,
+								845
 							]
 						],
 						"settings":
@@ -413,30 +404,30 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 45.0,
+						"translation.y": 285.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "scripts/functions/postcomment.php",
 					"settings":
 					{
-						"buffer_size": 441,
+						"buffer_size": 170,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								44,
-								44
+								5,
+								5
 							]
 						],
 						"settings":
 						{
-							"auto_name": "array(2) {",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -446,46 +437,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "scripts/functions/spotinfo.php",
-					"settings":
-					{
-						"buffer_size": 1168,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								594,
-								594
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "location.php",
 					"settings":
 					{
-						"buffer_size": 1307,
+						"buffer_size": 1733,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1276,
-								1276
+								1581,
+								1581
 							]
 						],
 						"settings":
@@ -494,30 +457,56 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 493.0,
+						"translation.y": 593.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": ".gitignore",
+					"buffer": 3,
+					"file": "layout/stylesheets/style.css",
 					"settings":
 					{
-						"buffer_size": 97,
+						"buffer_size": 5693,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								5688,
+								5688
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6603.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/Nick/hellocpp.cpp",
+					"settings":
+					{
+						"buffer_size": 119,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								18
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -527,38 +516,10 @@
 				},
 				{
 					"buffer": 5,
-					"file": "create.php",
+					"file": "/C/Users/Nick/goodbye.c",
 					"settings":
 					{
-						"buffer_size": 4809,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								193,
-								477
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "scripts/functions/addimage.php",
-					"settings":
-					{
-						"buffer_size": 2983,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -571,64 +532,11 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1080.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "scripts/functions/submit.php",
-					"settings":
-					{
-						"buffer_size": 817,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								112,
-								112
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"auto_name": "#include <windows.h>",
+							"syntax": "Packages/C++/C.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "scripts/functions/main.php",
-					"settings":
-					{
-						"buffer_size": 4677,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4513,
-								4513
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 9.0,
-						"translation.y": 2052.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

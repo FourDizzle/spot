@@ -4,14 +4,6 @@ include_once 'scripts/functions/directory.php';
 $functions = new Main();
 $functions->getHeader("Create New Spot");
 ?>
-<!--<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="<?php $functions->getStylesheet(); ?>">
-<title>Spot - Create a New Spot</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-</head>-->
 
 <body>
 <div id="main">

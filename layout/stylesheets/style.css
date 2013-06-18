@@ -347,4 +347,21 @@ img.showspot {
     padding:10px 15px 10px 15px;  
     border:2px solid #CCCCCC;  
     z-index:1001;  
-} 
+}
+
+#location-images {
+	float:left;
+	width:400px;
+	margin-left:55px;
+}
+
+#location-images img {
+	max-width:400px;
+}
+
+#comments {
+	float:left;
+	width:400px;
+	border:1px #000 solid;
+	margin-left:55px;
+}

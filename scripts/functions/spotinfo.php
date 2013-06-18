@@ -23,7 +23,6 @@ class Spot {
         //put results into array and grab the first row
         $results = $handle->fetchAll(PDO::FETCH_ASSOC);
         $row = $results[0];
-        
         //set variables to values
         $this->name = $row['name'];
         $this->lat = $row['lat'];

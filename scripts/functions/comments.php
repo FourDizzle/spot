@@ -21,4 +21,16 @@ class Comments {
         //return array of comments
         return $result;
 	}
+
+	public static function postComment($name, $message) {
+		//connect to the DB
+		$link = DBConnect::dbLink();
+		//query for comments
+		$query = "INSERT INTO comments
+				      (name, message)
+				      VALUES ($name, $message);";
+		$handle = $link->prepare($query);
+		//Execute query
+		$handle->execute();
+	}
 } ?>
