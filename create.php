@@ -44,7 +44,7 @@ $functions->getHeader("Create New Spot");
     	</div>
         <p>Copyright 2013 - Nick Cassiani</p>
     </div>
-</div>
+
 <div id="lightbox-panel">  
     <h2>Lightbox Panel</h2>  
     <p>You can add any valid content here.</p>  
@@ -54,6 +54,9 @@ $functions->getHeader("Create New Spot");
 </div>  
 <div id="lightbox"> </div>
 <input type="file" name="image" id="userimage" />
+
+</div>
+
 <script>
 $(document).ready(function() {
     

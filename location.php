@@ -37,9 +37,11 @@ $functions->getHeader("Location" . $spot->getName());
 					$comments = Comments::grabComments($location_id);
 					foreach ($comments as $row) {
 						echo "<div class=\"comment\">\n";
+						echo "<div class=\"message\">\n";
+						echo "	<p>" . $row->message . "</p>\n";
+						echo "	<span class=\"comment-date\">" . $row->postdate . "</span>\n";
+						echo "</div>\n";
 						echo "<h4>" . $row->name . "</h4>\n";
-						echo "<span class=\"comment-date\">" . $row->postdate . "</span>\n";
-						echo "<p>" . $row->message . "</p>\n";
 						echo "</div>\n";
 					} ?>
 					<div id="add-comment">
@@ -53,7 +55,17 @@ $functions->getHeader("Location" . $spot->getName());
 					</div>
 				</div>
 			</div>
-	</div>
+			<div id="footer">
+	    		<div id="footer-navigation">
+		            <ul>
+		                <li><a href="index.php">Home</a></li>
+		                <li><a href="create.php">Create New Spot</a></li>
+		                <li><a href="create.php">Contact</a></li>
+		            </ul>
+	    		</div>
+        <p>Copyright 2013 - Nick Cassiani</p>
+    </div>
+		</div>
 	<script>
 	$(document).ready(function(){
 		$('#post-comment').click(function(){
