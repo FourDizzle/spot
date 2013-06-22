@@ -33,25 +33,18 @@ $functions->getHeader("Location" . $spot->getName());
 		    		<img src="<?php echo($image_path); ?>" />
 		    	</div>
 				<div id = "comments">
-					<?php 
-					$comments = Comments::grabComments($location_id);
-					foreach ($comments as $row) {
-						echo "<div class=\"comment\">\n";
-						echo "<div class=\"message\">\n";
-						echo "	<p>" . $row->message . "</p>\n";
-						echo "	<span class=\"comment-date\">" . $row->postdate . "</span>\n";
-						echo "</div>\n";
-						echo "<h4>" . $row->name . "</h4>\n";
-						echo "</div>\n";
-					} ?>
+					<div id = "comment-container">
+						<?php Comments::getComments($location_id); ?>
+					</div>
 					<div id="add-comment">
 						<form>
 							<label>Name:</label>
 								<input type="text" id="name" />
 							<label>Message:</label>
 								<input type="text" id="message" />
-							<button id="post-comment">Post</button>
+								<input type="hidden" id="id" value="<?php echo $location_id; ?>" />
 						</form>
+						<button id="post-comment">Post</button>
 					</div>
 				</div>
 			</div>
@@ -69,9 +62,26 @@ $functions->getHeader("Location" . $spot->getName());
 	<script>
 	$(document).ready(function(){
 		$('#post-comment').click(function(){
-			
+			var name = $('input#name').val();
+			var message = $('input#message').val();
+			var id = $('input#id').val();
+			$.post('scripts/functions/postcomment.php', 
+					{ name : name, message: message, id: id}, 
+					function(result){ 
+						$('#comment-container').append(result);
+        			}, 'html');
 		});
 	});
 	</script>
+	<script>
+	$(document).ready(function(){
+		var location_id = $('input#id').val();
+		var commentPoll = setInterval(function(){
+			$.post('scripts/functions/getcomments.php', {id: location_id}, function(result) {
+				$('#comment-container').html(result);
+			});
+		}, 60000);
+	});
+	</script>
 	</body>
-</html>
+</html>	

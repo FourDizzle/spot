@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"else",
+				"elseif	elseif …"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"background-",
+				"background-color"
+			],
+			[
 				"ma",
 				"max-width"
 			],
@@ -24,26 +36,10 @@
 	"buffers":
 	[
 		{
-			"file": "scripts/functions/comments.php",
+			"file": "scripts/functions/main.php",
 			"settings":
 			{
-				"buffer_size": 850,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "scripts/functions/postcomment.php",
-			"settings":
-			{
-				"buffer_size": 170,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "location.php",
-			"settings":
-			{
-				"buffer_size": 1733,
+				"buffer_size": 4677,
 				"line_ending": "Windows"
 			}
 		},
@@ -51,44 +47,83 @@
 			"file": "layout/stylesheets/style.css",
 			"settings":
 			{
-				"buffer_size": 5693,
+				"buffer_size": 6104,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Nick/hellocpp.cpp",
+			"file": "location.php",
 			"settings":
 			{
-				"buffer_size": 119,
+				"buffer_size": 2150,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "",
-			"file": "/C/Users/Nick/goodbye.c",
-			"file_size": 194,
-			"file_write_time": 130149711664179079,
+			"file": "scripts/functions/comments.php",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Windows",
-				"name": "#include <windows.h>"
+				"buffer_size": 1910,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php \ninclude_once 'scripts/functions/comments.php';\n\n$postDate = \"2013-06-21T06:29:25-05:00\";\necho Comments::compareDate($postDate);\n?>",
+			"file": "date.php",
+			"file_size": 142,
+			"file_write_time": 130162933677660196,
+			"settings":
+			{
+				"buffer_size": 137,
+				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 346.0,
 		"selected_items":
 		[
 			[
-				"ssc",
-				"Set Syntax: C"
+				"pro",
+				"Project: Save As"
+			],
+			[
+				"",
+				"Project: Add Folder"
 			],
 			[
 				"ssphp",
 				"Set Syntax: PHP"
+			],
+			[
+				"ssj",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssc",
+				"Set Syntax: C++"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"ssjav",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssja",
+				"Set Syntax: Java Properties"
+			],
+			[
+				"SSSQL",
+				"Set Syntax: SQL"
+			],
+			[
+				"sssql",
+				"Set Syntax: SQL"
 			],
 			[
 				"tidy",
@@ -115,10 +150,6 @@
 				"Set Syntax: CSS"
 			],
 			[
-				"pro",
-				"Project: Save As"
-			],
-			[
 				"for",
 				"FormatSQL: Format SQL statement"
 			],
@@ -131,10 +162,6 @@
 				"FormatSQL: Format SQL statement"
 			],
 			[
-				"sssql",
-				"Set Syntax: SQL"
-			],
-			[
 				"php",
 				"Tidy PHP"
 			],
@@ -145,14 +172,6 @@
 			[
 				"sssq",
 				"Set Syntax: SQL"
-			],
-			[
-				"ssj",
-				"Set Syntax: JavaScript"
-			],
-			[
-				"",
-				"Snippet: #!/usr/bin/env"
 			],
 			[
 				"For",
@@ -180,6 +199,42 @@
 	},
 	"file_history":
 	[
+		"/C/xampp/htdocs/spot/create.php",
+		"/C/xampp/htdocs/spot/spot.sublime-workspace",
+		"/C/Users/Nick/Projects/FGA/FGA EIM WIM Training/Admin task instructions.txt",
+		"/C/Users/Nick/copy.cpp",
+		"/C/Users/Nick/thing.cpp",
+		"/C/Users/Nick/hey.cpp",
+		"/C/Users/Nick/math.cpp",
+		"/C/Users/Nick/helloworld.cpp",
+		"/C/Users/Nick/Desktop/Recycle/ucccx01/2013-06-18_15-53-53/uccx/log/MIVR/Cisco001MIVR134.log",
+		"/C/Users/Nick/Desktop/Recycle/ucccx01/2013-06-18_15-53-53/uccx/log/MIVR/Cisco001MIVR133.log",
+		"/C/Users/Nick/Desktop/Recycle/ucccx01/2013-06-18_15-53-53/uccx/log/MIVR/Cisco001MIVR135.log",
+		"/C/Users/Nick/Desktop/test.html",
+		"/C/Users/Nick/Desktop/Recycle2/ucccx01/2013-06-19_11-28-33/uccx/log/MIVR/Cisco001MIVR166.log",
+		"/C/Users/Nick/Desktop/Recycle2/ucccx01/2013-06-19_11-28-33/uccx/log/MIVR/Cisco001MIVR167.log",
+		"/C/xampp/htdocs/spot/layout/stylesheets/style.css",
+		"/C/Users/Nick/Desktop/surveycallback.properties",
+		"/C/Users/Nick/Desktop/Force/ucccx01/2013-06-13_16-38-10/uccx/log/MIVR/Cisco001MIVR192.log",
+		"/C/Users/Nick/Desktop/Force/ucccx01/2013-06-13_16-38-10/uccx/log/MIVR/Cisco001MIVR191.log",
+		"/C/Users/Nick/Desktop/ucccx01/Cisco001MIVR007.log",
+		"/C/Users/Nick/Desktop/ucccx01/Cisco001MIVR005.log",
+		"/C/Users/Nick/Desktop/textclient/MessageProcessor.java",
+		"/C/Users/Nick/Desktop/ucccx01/Cisco001MIVR006.log.gz",
+		"/C/Users/Nick/Desktop/ucccx01/Cisco001MIVR007.log.gz",
+		"/C/xampp/htdocs/sip/call.php",
+		"/C/xampp/htdocs/sip/php-sip/PhpSIP.class.php",
+		"/C/xampp/htdocs/sip/php-sip/example.php",
+		"/C/Users/Nick/Desktop/textclient/SipLayer.java",
+		"/C/Users/Nick/Desktop/textclient/TextClient.java",
+		"/C/Users/Nick/Projects/FGA/Survey Call Back/bin/.classpath",
+		"/C/Users/Nick/Desktop/SurveyCallBack.java",
+		"/C/Users/Nick/c/http/tcp.cpp",
+		"/C/Users/Nick/c/hellocpp.cpp",
+		"/C/Users/Nick/c/helloworld.c",
+		"/C/Users/Nick/c/hello.exe",
+		"/C/Users/Nick/c/http/test.cpp",
+		"/C/Users/Nick/c - c++/http/test.cpp",
 		"/C/Users/Nick/fileread.c",
 		"/C/Users/Nick/helloworld.c",
 		"/C/MinGW/helloworld.c",
@@ -187,7 +242,6 @@
 		"/C/MinGW/msys/1.0/etc/fstab",
 		"/C/xampp/htdocs/spot/scripts/functions/submit.php",
 		"/C/xampp/htdocs/spot/scripts/functions/main.php",
-		"/C/xampp/htdocs/spot/create.php",
 		"/C/xampp/htdocs/spot/scripts/functions/directory.php",
 		"/C/xampp/htdocs/spot/scripts/functions/addimage.php",
 		"/C/Infoscoop3/apache-tomcat-6.0.28/conf/server.xml",
@@ -199,8 +253,6 @@
 		"/C/xampp/htdocs/spot/scripts/functions/comments.php",
 		"/C/xampp/htdocs/spot/scripts/functions/generateSpot.php",
 		"/C/xampp/htdocs/spot/index.php",
-		"/C/xampp/htdocs/spot/layout/stylesheets/style.css",
-		"/C/xampp/htdocs/spot/spot.sublime-workspace",
 		"/C/Users/Nick/Documents/script.js",
 		"/C/Users/Nick/Documents/index.html",
 		"/C/Users/Nick/Projects/Daughters of Charity/server/tomcat/webapps/DaughtersOfCharity/WEB-INF/config.properties",
@@ -224,9 +276,28 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			".*49000114201.*",
+			"2817707873",
+			"get",
+			".*49000103190.*",
+			"2817707873",
+			";\n",
+			"405239",
+			".*49000025362.*",
+			"show()",
+			"438331703: Jun 06 14:04:13.344 CDT %MIVR-ENG-7-UNK:Execute step of Task 47000940895 : _RecordingUser = Get User (User ID: \"voipccxpromptupdater\")",
+			".*47000940895.*",
+			"2817707873",
+			"via",
+			"sendData",
+			"');\n",
+			"function set",
+			"set",
+			"curlpp-0.7.3\\include\\curlpp\\",
+			"/",
 			"iostream",
 			"dhcp",
 			"10.2.0.2",
@@ -335,17 +406,7 @@
 			"task",
 			"record",
 			"\\n",
-			" = ",
-			" - ",
-			"^1",
-			", ",
-			"\\n",
-			"/n",
-			"(byte)",
-			",",
-			"(byte)",
-			"0x",
-			", (byte)"
+			" = "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -379,58 +440,59 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "scripts/functions/comments.php",
+					"file": "scripts/functions/main.php",
 					"settings":
 					{
-						"buffer_size": 850,
+						"buffer_size": 4677,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								845,
-								845
+								2062,
+								2062
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 285.0,
+						"translation.y": 947.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "scripts/functions/postcomment.php",
+					"file": "layout/stylesheets/style.css",
 					"settings":
 					{
-						"buffer_size": 170,
+						"buffer_size": 6104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5,
-								5
+								6025,
+								6025
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/CSS/CSS.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6900.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -440,15 +502,15 @@
 					"file": "location.php",
 					"settings":
 					{
-						"buffer_size": 1733,
+						"buffer_size": 2150,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1581,
-								1581
+								1215,
+								1215
 							]
 						],
 						"settings":
@@ -457,83 +519,57 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 593.0,
+						"translation.y": 395.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "layout/stylesheets/style.css",
+					"file": "scripts/functions/comments.php",
 					"settings":
 					{
-						"buffer_size": 5693,
+						"buffer_size": 1910,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5688,
-								5688
+								285,
+								285
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6603.0,
+						"translation.y": 53.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "/C/Users/Nick/hellocpp.cpp",
+					"file": "date.php",
 					"settings":
 					{
-						"buffer_size": 119,
+						"buffer_size": 137,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								18
+								137,
+								137
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/Nick/goodbye.c",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "#include <windows.h>",
-							"syntax": "Packages/C++/C.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -590,16 +626,16 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 211.0,
 	"status_bar_visible": true
 }

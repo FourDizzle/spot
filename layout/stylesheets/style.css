@@ -367,18 +367,17 @@ img.showspot {
 
 #comments {
 	float:left;
-	width:400px;
-	border:1px #000 solid;
-	margin-left:55px;
+	width:420px;
+	margin-left:35px;
 }
 
 .comment {
-	margin:5px;
-	padding:5px;
+	margin:10px;
 }
 
 .message {
-	margin:5px;
+	margin:0px;
+	margin-left:20px;
 	margin-bottom:0px;
 	padding:5px;
 	background-color: #ddd;
@@ -386,9 +385,21 @@ img.showspot {
 }
 
 .comment h4 {
-	margin:0px;
+	margin:5px 10px 0px 10px;
 	padding:0px;
-	padding-top:10px;
-	font-family: arial, hevetica, sans-serif;
+	font-family: arial, helvetica, sans-serif;
 	height:30px;
+}
+
+.comment .message p {
+	font-family:arial, helvetica, sans-serif;
+	font-size:15px;
+	margin:5px 10px 5px 10px;
+}
+
+.comment .message p.comment-date {
+	font-family:arial, helvetica, sans-serif;
+	font-size:9px;
+	text-align:right;
+	margin-right:20px;
 }
