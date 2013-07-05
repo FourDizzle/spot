@@ -19,12 +19,13 @@ $image_path = $spot->getImagePath();
 if ($image_path == null) $image_path = 'images/layout/image-preview.png';
 else $image_path = "images/locations/" . $image_path;
 ?>
-<div id="close"><a id="close-panel" href="#">[close]</a></div>
-<label>Name:</label>
-	<input type="text" name="name" id="name" value="<?php echo $name; ?>"/><br />
+<div id="close"><a id="close-panel" href="#">[X]</a></div>
+<!--<label>Name:</label>-->
 <image id="image-preview" src="<?php echo $image_path; ?>" alt="image preview" /><br />
-<label>Caption:</label>
-	<textarea name="caption" id="caption"><?php echo $caption; ?></textarea>
+	<input type="text" name="name" id="name" placeholder="Spot name" value="<?php echo $name; ?>"/><br />
+
+<!--<label>Caption:</label>-->
+	<textarea name="caption" placeholder="Caption" id="caption"><?php echo $caption; ?></textarea>
         
         
         
@@ -35,6 +36,7 @@ else $image_path = "images/locations/" . $image_path;
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+	$('#submit-button').hide();
         //This replaces the file input with something nicer
         document.querySelector('#image-preview').addEventListener('click', function(e) {
         // Use the native click() of the file input.
@@ -47,15 +49,9 @@ $(document).ready(function(){
         //shows preview of image
 	$('#userimage').change(function(){
 		didImageChange = true;
-                var imageToUpload = document.getElementById("userimage").files[0];
-		var formData = new FormData();
-		formData.append("file", imageToUpload);
-		formData.append("newname", randomName);
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("POST", "scripts/functions/upload.php", false);
-		xmlhttp.send(formData);
-		randomName = xmlhttp.responseXML.getElementsByTagName('filename')[0].childNodes[0].nodeValue;
-		document.getElementById("image-preview").setAttribute("src", "images/temporary/"+randomName);
+        var imageToUpload = document.getElementById("userimage").files[0];
+		randomName = postImage(imageToUpload, randomName);
+		document.getElementById("image-preview").setAttribute("src", "/spot/images/temporary/" + randomName);
 		$('#submit-button').show();
 		});
 	
@@ -64,18 +60,9 @@ $(document).ready(function(){
 		document.getElementById("name").innerHTML = randomName;
 		var submitName = $('#name').val();
 		var caption = $('#caption').val();
-		var submitData = new FormData();
-                submitData.append("id", "<?php echo $id ?>");
-		submitData.append("spotname", submitName);
-		submitData.append("caption", caption);
-		if (didImageChange) {
-                    submitData.append("filename", randomName);
-                } else {
-                    submitData.append("filename", "none");
-                }
-		var submitHttp = new XMLHttpRequest();
-		submitHttp.open("POST", "scripts/functions/submit.php", false);
-		submitHttp.send(submitData);
+		var imagePath = $('#image-preview').attr('src');
+		var id = <?php echo $id ?>;
+		postSpot(id, submitName, caption, imagePath);
 		$("#lightbox, #lightbox-panel").fadeOut(300);
                 });
 	});

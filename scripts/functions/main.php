@@ -113,14 +113,16 @@ class Main
         return $qrpath;
     }
 
-    public function getHeader($title) {
-        echo "<!DOCTYPE html>";
-      echo "  <html>";
-      echo "  <head>";
-      echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
-      echo "  <link rel=\"stylesheet\" type=\"text/css\" href=\"" . file_paths::getStyleSheetPath() . "\">";
-      echo "  <title>Spot - " . $title . "</title>";
-      echo "  <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>";
-      echo "  </head>";
-            }
-    }
+        public function getHeader($title) {
+            echo "<!DOCTYPE html>\n";
+            echo "  <html>\n";
+            echo "  <head>\n";
+            echo "  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n";
+            echo "  <link rel=\"stylesheet\" type=\"text/css\" href=\"" . file_paths::getStyleSheetPath() . "\">\n";
+            echo "  <title>Spot - " . $title . "</title>\n";
+            echo "  <meta name=\"viewport\" content=\"width=440px\">\n";
+            echo "  <script src=\"scripts/functions/spotfunctions.js\"></script>\n";
+            echo "  <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n";
+            echo "  </head>";
+        }
+ }

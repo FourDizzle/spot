@@ -5,6 +5,7 @@ $functions = new Main();
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=440px" name="viewport" />
 <link rel="stylesheet" type="text/css" href="<?php $functions->getStylesheet(); ?>">
 <title>Spot - Home</title>
 </head>

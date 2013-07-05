@@ -4,20 +4,96 @@
 		"selected_items":
 		[
 			[
-				"else",
-				"elseif	elseif …"
+				"mar",
+				"margin-left"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"lightbox",
+				"lightbox-panel"
+			],
+			[
+				"ma",
+				"margin"
 			],
 			[
 				"font",
 				"font-family"
 			],
 			[
-				"background-",
-				"background-color"
+				"fon",
+				"font-family"
 			],
 			[
-				"ma",
-				"max-width"
+				"submit",
+				"submitData"
+			],
+			[
+				"getLat",
+				"getLatLon"
+			],
+			[
+				"lat",
+				"latLon"
+			],
+			[
+				"lon",
+				"longitude"
+			],
+			[
+				"tem",
+				"temporary"
+			],
+			[
+				"rand",
+				"randomName"
+			],
+			[
+				"file",
+				"file"
+			],
+			[
+				"fu",
+				"functions"
+			],
+			[
+				"n",
+				"n"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"border",
+				"border-left"
+			],
+			[
+				"location",
+				"location_id"
+			],
+			[
+				"id",
+				"id"
+			],
+			[
+				"loca",
+				"location_id"
+			],
+			[
+				"comment",
+				"comment-container"
+			],
+			[
+				"else",
+				"elseif	elseif …"
+			],
+			[
+				"background-",
+				"background-color"
 			],
 			[
 				"name",
@@ -36,18 +112,26 @@
 	"buffers":
 	[
 		{
-			"file": "scripts/functions/main.php",
+			"file": "layout/stylesheets/style.css",
 			"settings":
 			{
-				"buffer_size": 4677,
+				"buffer_size": 7522,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "layout/stylesheets/style.css",
+			"file": "spot.php",
 			"settings":
 			{
-				"buffer_size": 6104,
+				"buffer_size": 3611,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/addimage.php",
+			"settings":
+			{
+				"buffer_size": 2366,
 				"line_ending": "Windows"
 			}
 		},
@@ -55,7 +139,55 @@
 			"file": "location.php",
 			"settings":
 			{
-				"buffer_size": 2150,
+				"buffer_size": 3620,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "create.php",
+			"settings":
+			{
+				"buffer_size": 4812,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 2008,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/spotfunctions.js",
+			"settings":
+			{
+				"buffer_size": 2251,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/submit.php",
+			"settings":
+			{
+				"buffer_size": 1147,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/directory.php",
+			"settings":
+			{
+				"buffer_size": 1390,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/functions/postcomment.php",
+			"settings":
+			{
+				"buffer_size": 196,
 				"line_ending": "Windows"
 			}
 		},
@@ -63,18 +195,26 @@
 			"file": "scripts/functions/comments.php",
 			"settings":
 			{
-				"buffer_size": 1910,
+				"buffer_size": 2957,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "<?php \ninclude_once 'scripts/functions/comments.php';\n\n$postDate = \"2013-06-21T06:29:25-05:00\";\necho Comments::compareDate($postDate);\n?>",
-			"file": "date.php",
-			"file_size": 142,
-			"file_write_time": 130162933677660196,
+			"file": "scripts/functions/updategps.php",
 			"settings":
 			{
-				"buffer_size": 137,
+				"buffer_size": 310,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<?php\n\ninclude_once 'directory.php';\ninclude_once 'database.php';\n\nclass Main\n{\n    \n    function getStylesheet() {\n            echo(file_paths::getStyleSheetPath());\n    }\n    \n    /* creates a compressed zip file */\n    function create_zip($files = array(),$destination = '',$overwrite = false) {\n            //if the zip file already exists and overwrite is false, return false\n            if(file_exists($destination) && !$overwrite) { return false; }\n            //vars\n            $valid_files = array();\n            //if files were passed in...\n            if(is_array($files)) {\n                    //cycle through each file\n                    foreach($files as $file) {\n                            //make sure the file exists\n                            if(file_exists($file)) {\n                                    $valid_files[] = $file;\n                            }\n                    }\n            }\n            //if we have good files...\n            if(count($valid_files)) {\n                    //create the archive\n                    $zip = new ZipArchive();\n                    if($zip->open($destination,$overwrite ? ZIPARCHIVE::OVERWRITE : ZIPARCHIVE::CREATE) !== true) {\n                            return false;\n                    }\n                    //add the files\n                    foreach($valid_files as $file) {\n                            $zip->addFile($file,$file);\n                    }\n                    //debug\n                    //echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;\n\n                    //close the zip -- done!\n                    $zip->close();\n\n                    //check to make sure the file exists\n                    return file_exists($destination);\n            }\n            else\n            {\n                    return false;\n            }\n    }\n    \n    \n    function getSpotDetails($id){\n        try {\n            //connect to database\n            $link = DbConnect::dbLink();\n            //select all information on a spot\n            $selectSpot = \"SELECT COUNT(id) FROM location WHERE id = $id;\";\n            //create handle to hold sql functions\n            $handle = $link->prepare($selectSpot);\n            //execute query\n            $handle->execute();\n            $result = $handle->fetchAll(\\PDO::FETCH_OBJ);\n            //Use only the first result there should not be and duplicates anyway\n            $row = $result[0];\n            return $row;\n        } catch (PDOException $ex) {\n            echo('THERE WAS AND ERROR! <br />');\n            echo($ex);\n            return false;\n        }\n        \n    }\n    \n    #This function generates a new DB entry without any info\n    #The function returns the unique id of the location\n    function generateLocation(){\n        //establish DB connection\n        $link = DbConnect::dbLink();\n        //create location id auto increments\n        $query = \"INSERT INTO `location` (`lat`, `lon`)\"\n                 . \"VALUES ('0.000000', '0.000000');\";\n        \n        $link->exec($query);\n        $insertID = $link->lastInsertId();\n        \n        return $insertID;\n    }\n    \n    #this function generates a QR based on a location id\n    #and returns the full-qualified image path\n    function generateQR($id) {\n        #make qr code\n        require(\"qrcode/qrlib.php\");\n        $filename = \n                file_paths::getRoot() . 'images/qrcode/spotcode' . $id . '.png';\n        QRcode::png(\"http://www.spot-qr.com/spot.php?id=\".$id.\"&s=true\", $filename,'Q',9,1);\n\n        # If you know your originals are of type PNG.\n        $qrcode = imagecreatefrompng($filename);\n        $watermark = imagecreatefrompng(file_paths::getRoot() . 'images/qrcode/watermark.png');\n        imagealphablending($watermark,true);\n        imagecopymerge($qrcode, $watermark, 0, 0, 7, 4, 315, 315, 100);\n\n        # Save the image to a file\n        $qrpath = file_paths::getRoot() . 'images/qrcode/spotcode'.$id.'.png';\n        imagepng($qrcode, file_paths::getRoot() . 'images/qrcode/spotcode'.$id.'.png');\n        //$imgpath = 'images/qrcode/spotcode'.$id.'.png';\n                \n        return $qrpath;\n    }\n\n        public function getHeader($title) {\n            echo \"<!DOCTYPE html>\\n\";\n            echo \"  <html>\\n\";\n            echo \"  <head>\\n\";\n            echo \"  <meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\" />\\n\";\n            echo \"  <link rel=\\\"stylesheet\\\" type=\\\"text/css\\\" href=\\\"\" . file_paths::getStyleSheetPath() . \"\\\">\\n\";\n            echo \"  <title>Spot - \" . $title . \"</title>\\n\";\n            echo \"  <meta name=\\\"viewport\\\" content=\\\"width=440px\\\">\\n\";\n            echo \"  <script src=\\\"scripts/functions/spotfunctions.js\\\"></script>\\n\";\n            echo \"  <script src=\\\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\\\"></script>\\n\";\n            echo \"  </head>\";\n        }\n }",
+			"file": "scripts/functions/main.php",
+			"file_size": 5019,
+			"file_write_time": 130166521714750752,
+			"settings":
+			{
+				"buffer_size": 4888,
 				"line_ending": "Windows"
 			}
 		}
@@ -82,9 +222,25 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 346.0,
+		"height": 58.0,
 		"selected_items":
 		[
+			[
+				"ssc#",
+				"Set Syntax: C#"
+			],
+			[
+				"ssphp",
+				"Set Syntax: PHP"
+			],
+			[
+				"ssja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssjava",
+				"Set Syntax: Java"
+			],
 			[
 				"pro",
 				"Project: Save As"
@@ -92,10 +248,6 @@
 			[
 				"",
 				"Project: Add Folder"
-			],
-			[
-				"ssphp",
-				"Set Syntax: PHP"
 			],
 			[
 				"ssj",
@@ -112,10 +264,6 @@
 			[
 				"ssjav",
 				"Set Syntax: JavaScript"
-			],
-			[
-				"ssja",
-				"Set Syntax: Java Properties"
 			],
 			[
 				"SSSQL",
@@ -199,12 +347,39 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Nick/Desktop/Greyhound/Greyhound_JSC/src/com/spinsci/greyhound/rs/gpx/ExpressService.java",
+		"/C/Users/Nick/Desktop/Greyhound/Greyhound_JSC/src/com/spinsci/greyhound/rs/util/BaseService.java",
+		"/C/Users/Nick/Desktop/Greyhound/RestService/src/com/spinsci/greyhound/rest/pcc/AllFaresAndSchedResource.java",
+		"/C/xampp/htdocs/spot/setup.php",
+		"/C/xampp/htdocs/spot/scripts/functions/qrcode/spotcode99998783.png-errors.txt",
+		"/C/Users/Nick/Desktop/FGAAgentDesktop/Screenpop_related_samplecode.txt",
+		"/C/xampp/htdocs/spot/scripts/functions/updategps.php",
+		"/C/xampp/htdocs/spot/scripts/functions/spotinfo.php",
+		"/C/Users/Nick/AppData/Local/Temp/Client.java",
+		"/C/Users/Nick/AppData/Local/Temp/VideoStream.java",
+		"/C/Users/Nick/AppData/Local/Temp/Server-1.java",
+		"/C/Users/Nick/AppData/Local/Temp/RTPpacket.java",
+		"/C/xampp/htdocs/spot/scripts/functions/spotfunctions.js",
+		"/C/xampp/htdocs/spot/spot.php",
+		"/C/xampp/htdocs/spot/scripts/functions/directory.php",
+		"/C/xampp/htdocs/spot/scripts/functions/main.php",
+		"/C/xampp/htdocs/spot/scripts/functions/comments.php",
+		"/C/Users/Nick/hey.cpp",
+		"/C/xampp/htdocs/spot/layout/stylesheets/style-large.css",
+		"/C/Users/Nick/Downloads/VideoTransmit.java",
 		"/C/xampp/htdocs/spot/create.php",
+		"/C/xampp/htdocs/spot/layout/stylesheets/style.css",
+		"/C/xampp/htdocs/spot/scripts/functions/addimage.php",
+		"/C/xampp/htdocs/spot/spotinfo.php",
+		"/C/xampp/htdocs/spot/scripts/functions/getcomments.php",
+		"/C/xampp/htdocs/spot/scripts/functions/postcomment.php",
+		"/C/xampp/htdocs/spot/scripts/functions/database.php",
+		"/C/xampp/htdocs/spot/location.php",
+		"/C/xampp/htdocs/spot/date.php",
 		"/C/xampp/htdocs/spot/spot.sublime-workspace",
 		"/C/Users/Nick/Projects/FGA/FGA EIM WIM Training/Admin task instructions.txt",
 		"/C/Users/Nick/copy.cpp",
 		"/C/Users/Nick/thing.cpp",
-		"/C/Users/Nick/hey.cpp",
 		"/C/Users/Nick/math.cpp",
 		"/C/Users/Nick/helloworld.cpp",
 		"/C/Users/Nick/Desktop/Recycle/ucccx01/2013-06-18_15-53-53/uccx/log/MIVR/Cisco001MIVR134.log",
@@ -213,7 +388,6 @@
 		"/C/Users/Nick/Desktop/test.html",
 		"/C/Users/Nick/Desktop/Recycle2/ucccx01/2013-06-19_11-28-33/uccx/log/MIVR/Cisco001MIVR166.log",
 		"/C/Users/Nick/Desktop/Recycle2/ucccx01/2013-06-19_11-28-33/uccx/log/MIVR/Cisco001MIVR167.log",
-		"/C/xampp/htdocs/spot/layout/stylesheets/style.css",
 		"/C/Users/Nick/Desktop/surveycallback.properties",
 		"/C/Users/Nick/Desktop/Force/ucccx01/2013-06-13_16-38-10/uccx/log/MIVR/Cisco001MIVR192.log",
 		"/C/Users/Nick/Desktop/Force/ucccx01/2013-06-13_16-38-10/uccx/log/MIVR/Cisco001MIVR191.log",
@@ -241,16 +415,10 @@
 		"/C/Users/Nick/Desktop/Infoscoop3/apache-tomcat-6.0.28/conf/tomcat-users.xml",
 		"/C/MinGW/msys/1.0/etc/fstab",
 		"/C/xampp/htdocs/spot/scripts/functions/submit.php",
-		"/C/xampp/htdocs/spot/scripts/functions/main.php",
-		"/C/xampp/htdocs/spot/scripts/functions/directory.php",
-		"/C/xampp/htdocs/spot/scripts/functions/addimage.php",
 		"/C/Infoscoop3/apache-tomcat-6.0.28/conf/server.xml",
-		"/C/xampp/htdocs/spot/location.php",
-		"/C/xampp/htdocs/spot/scripts/functions/spotinfo.php",
 		"/C/xampp/htdocs/spot/.gitignore",
 		"/C/Users/Nick/Projects/SIP JUnit/jain-sip-android/shootme/src/examples/simplecallsetup/Shootme.java",
 		"/C/Users/Nick/AppData/Local/Temp/comments.sql",
-		"/C/xampp/htdocs/spot/scripts/functions/comments.php",
 		"/C/xampp/htdocs/spot/scripts/functions/generateSpot.php",
 		"/C/xampp/htdocs/spot/index.php",
 		"/C/Users/Nick/Documents/script.js",
@@ -279,6 +447,13 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"endpoint",
+			"getEndpoint()",
+			"50px",
+			"left",
+			"0",
+			"width:",
+			";*/\n",
 			".*49000114201.*",
 			"2817707873",
 			"get",
@@ -399,19 +574,12 @@
 			"<(poop)>",
 			"<(\\w*)>",
 			".*187000000140.*",
-			"^.*Execute step of Task 187000000140 : ",
-			"^.*(Execute step of Task 187000000140 : )(.*)$",
-			"^.*(Execute step of Task 187000000140).*$",
-			"record",
-			"task",
-			"record",
-			"\\n",
-			" = "
+			"^.*Execute step of Task 187000000140 : "
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"', '",
@@ -440,23 +608,128 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "scripts/functions/main.php",
+					"file": "layout/stylesheets/style.css",
 					"settings":
 					{
-						"buffer_size": 4677,
+						"buffer_size": 7522,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2062,
-								2062
+								916,
+								916
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1083.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "spot.php",
+					"settings":
+					{
+						"buffer_size": 3611,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3454,
+								3395
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1433.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "scripts/functions/addimage.php",
+					"settings":
+					{
+						"buffer_size": 2366,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								971,
+								377
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "location.php",
+					"settings":
+					{
+						"buffer_size": 3620,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1364,
+								1382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 475.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "create.php",
+					"settings":
+					{
+						"buffer_size": 4812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3206,
+								3206
 							]
 						],
 						"settings":
@@ -466,105 +739,136 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 947.0,
+						"translation.y": 1300.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "layout/stylesheets/style.css",
+					"buffer": 5,
+					"file": "index.php",
 					"settings":
 					{
-						"buffer_size": 6104,
+						"buffer_size": 2008,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6025,
-								6025
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 6900.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "location.php",
-					"settings":
-					{
-						"buffer_size": 2150,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1215,
-								1215
+								363,
+								909
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 395.0,
+						"translation.y": 468.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "scripts/functions/comments.php",
+					"buffer": 6,
+					"file": "scripts/functions/spotfunctions.js",
 					"settings":
 					{
-						"buffer_size": 1910,
+						"buffer_size": 2251,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								285,
-								285
+								1271,
+								1271
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 357.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "scripts/functions/submit.php",
+					"settings":
+					{
+						"buffer_size": 1147,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								271,
+								271
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 53.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "date.php",
+					"buffer": 8,
+					"file": "scripts/functions/directory.php",
 					"settings":
 					{
-						"buffer_size": 137,
+						"buffer_size": 1390,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								137,
-								137
+								1366,
+								1366
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 456.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "scripts/functions/postcomment.php",
+					"settings":
+					{
+						"buffer_size": 196,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -573,6 +877,87 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "scripts/functions/comments.php",
+					"settings":
+					{
+						"buffer_size": 2957,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2387,
+								2109
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1117.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "scripts/functions/updategps.php",
+					"settings":
+					{
+						"buffer_size": 310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								136,
+								136
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "scripts/functions/main.php",
+					"settings":
+					{
+						"buffer_size": 4888,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3474,
+								3474
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1731.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -636,6 +1021,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 211.0,
+	"side_bar_width": 294.0,
 	"status_bar_visible": true
 }

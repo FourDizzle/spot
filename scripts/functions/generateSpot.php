@@ -7,7 +7,7 @@ $functions = new Main();
 
 $spotID = $functions->generateLocation();
 $functions->generateQR($spotID);
-$spotImagePath = file_paths::getServerPath() . 'images/qrcode/spotcode'.$spotID.'.png';
+$spotImagePath = file_paths::getImagesPath() . 'qrcode/spotcode'.$spotID.'.png';
 $spotFilePath = file_paths::getRoot() . 'images/qrcode/spotcode' . $spotID . '.png';
 
 header('Content-type: text/xml');

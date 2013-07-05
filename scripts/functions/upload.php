@@ -15,9 +15,8 @@ if ((($_FILES["file"]["type"] == "image/gif")
 || ($_FILES["file"]["type"] == "image/jpeg")
 || ($_FILES["file"]["type"] == "image/png")
 || ($_FILES["file"]["type"] == "image/pjpeg"))
-&& ($_FILES["file"]["size"] < 200000000)
-&& in_array($extension, $allowedExts))
-  {
+&& ($_FILES["file"]["size"] < 7000000)
+&& in_array($extension, $allowedExts) {
   if ($_FILES["file"]["error"] > 0)
     {
     #echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
@@ -46,8 +45,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
       }
     }
   }
-else
-  {
+else {
   echo "Invalid file";
   }
 ?>

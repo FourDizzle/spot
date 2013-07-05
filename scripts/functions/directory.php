@@ -50,6 +50,6 @@ class file_paths {
     }
     
     static function getServerPath() {
-        return 'http://localhost' . self::$root;
+        return $_SERVER['SERVER_ADDR'] . self::$root;
     }
 }
